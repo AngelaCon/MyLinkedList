@@ -1,4 +1,4 @@
-public class Nano {
+public class Node {
     private String data;
     private Node next,prev;
 
@@ -8,7 +8,6 @@ public class Nano {
 
     public String getData() {
         return data;
-
     }
 
     public Node getNext() {
@@ -21,18 +20,16 @@ public class Nano {
 
     }
 
-    public String setData(String value) {
+    public void setData(String value) {
         data = value;
     }
 
-    public Node setNext() {
+    public void setNext(Node n) {
         this.next = next;
     }
 
-    public void setPrev() {
+    public void setPrev(Node n) {
         this.prev = prev;
     }
-
-
 
 }
