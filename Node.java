@@ -25,11 +25,11 @@ public class Node {
     }
 
     public void setNext(Node n) {
-        this.next = next;
+        next = n;
     }
 
     public void setPrev(Node n) {
-        this.prev = prev;
+        prev = n;
     }
 
 }

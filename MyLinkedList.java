@@ -90,4 +90,16 @@ public class MyLinkedList {
         if (size == 0) s = "[]";
         return s;
     }
+
+
+    public String toStringReversed() {
+        String s ="[";
+        for (int i = size-1; i >= 0; i--){
+            s+=get(i);
+            if(i!=0) s+=", ";
+            else s+= "]";
+        }
+        if (size == 0) s = "[]";
+        return s;
+    }
 }
