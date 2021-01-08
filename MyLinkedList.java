@@ -34,33 +34,7 @@ public class MyLinkedList {
     if(index < 0 || index > size) {
       throw new IndexOutOfBoundsException("index cannot be " + index);
     }
-    else{
-      if(index == 0) {
-        start.setPrev(added);
-        Node oldStart = start;
-        start = added;
-        start.setNext(oldStart);
-        size++;
-      }
-      else if(index == size) {
-        add(value);
-      }
-      else {
-        Node current = start;
-        for(int i = 0; i < index-1; i++) {
-          current = current.getNext();
-        }
-        current.setNext(added);
-        added.setPrev(current);
-        current = end;
-        for(int i = size - 1; i > index+1; i--) {
-          current = end.getPrev();
-        }
-        current.setPrev(added);
-        added.setNext(current);
-        size++;
-      }
-    }
+
   }
 
     public String get(int index) {
