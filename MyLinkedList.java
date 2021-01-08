@@ -26,6 +26,14 @@ public class MyLinkedList {
         return true;
     }
     public boolean add(int index, String value) {
+        if (index < 0 || index > size)throw new IndexOutOfBoundsException();
+        if (index==size) add(value);
+        else if(size == 1 && index == 0){
+            String old = start.getData();
+            start.setData(value);
+            end = new Node(old);
+            end.setPrev(start);
+            size++;
 
 
     }
