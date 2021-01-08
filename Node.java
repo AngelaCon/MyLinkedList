@@ -7,28 +7,32 @@ public class Nano {
     }
 
     public String getData() {
+        return data;
 
     }
 
     public Node getNext() {
+        return next;
 
     }
 
     public Node getPrev() {
+        return prev;
 
     }
 
-    public String setData() {
-
+    public String setData(String value) {
+        data = value;
     }
 
     public Node setNext() {
-
+        this.next = next;
     }
 
-    public Node setPrev() {
-
+    public void setPrev() {
+        this.prev = prev;
     }
 
-    //write get/set methods for all three instance variables.
+
+
 }
