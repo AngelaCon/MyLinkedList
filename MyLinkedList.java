@@ -12,30 +12,56 @@ public class MyLinkedList {
     }
 
     public boolean add(String value) {
-        Node newNode = new Node(value);
+        Node n = new Node(value);
         if (size == 0) {
+            start = n;
+            end = n;
             size++;
-            end = start = newNode;
             return true;
         }
         else {
-            size++;
-          Node temp = new Node(value);
-          end.setNext(temp);
-          temp.setPrev(end);
-          end = temp;
+          size++;
+          end.setNext(n);
+          n.setPrev(end);
+          end = n;
           return true;
         }
     }
 
 
     public void add(int index, String value) {
-    Node added = new Node(value);
-    if(index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("index cannot be " + index);
-    }
+        if(index < 0 || (index > size)) {
+          throw new IndexOutOfBoundsException("index can only be positive and less than size" + index);
+        }
+     else {
+         Node n = new Node(value);
+         Node preVal = getNodeAtIndex(index-1);
+         Node currentVal = getNodeAtIndex(index);
+        if (index == 0){
+            start = n;
+            n.setNext(currentVal);
+            currentVal.setPrev(n);
+            size++;
 
-  }
+        } else if (index == size){
+            add(value);
+        } else {
+            // set previous to new
+            preVal.setNext(n);
+
+            // set new to previous
+            n.setPrev(preVal);
+
+            //set new to current
+            n.setNext(currentVal);
+
+            //set current to new
+            currentVal.setPrev(n);
+            size++;
+
+        }
+    }
+}
 
     public String get(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
@@ -56,9 +82,9 @@ public class MyLinkedList {
 
     public String toString() {
         String s = "[";
-        for(int i  = 0; i< this.size; i++){
-            s = s + this.get(i);
-            if(i!= this.size-1) s+= ", ";
+        for(int i  = 0; i< size; i++){
+            s = s + get(i);
+            if(i!= size-1) s+= ", ";
             else s+= "]";
         }
         if (size == 0) s = "[]";
@@ -76,4 +102,13 @@ public class MyLinkedList {
         if (size == 0) s = "[]";
         return s;
     }
-}
+
+
+    private Node getNodeAtIndex(int index){
+            Node current = start;
+            for (int i = 0; i<index; i++){
+              current = current.getNext();
+            }
+            return current;
+        }
+    }
