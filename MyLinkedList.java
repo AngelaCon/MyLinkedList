@@ -37,7 +37,10 @@ public class MyLinkedList {
          Node n = new Node(value);
          Node preVal = getNodeAtIndex(index-1);
          Node currentVal = getNodeAtIndex(index);
-        if (index == 0){
+         if (index == 0 && size ==0) {
+             add(value);
+         }
+        else if (index == 0){
             start = n;
             n.setNext(currentVal);
             currentVal.setPrev(n);
@@ -72,12 +75,11 @@ public class MyLinkedList {
         return value.getData();
     }
     public String set(int index, String value) {
-        Node current = start;
         if (index < 0 || index >= size)throw new IndexOutOfBoundsException();
-        for(int i = 0;i<index;i++){
-            current = current.getNext();
-        }
-        return current.getData();
+        Node current = getNodeAtIndex(index);
+        String temp = current.getData();
+        current.setData(value);
+        return temp;
     }
 
     public String toString() {
@@ -113,33 +115,50 @@ public class MyLinkedList {
         }
 
 
-
     public String remove(int index) {
         if(index < 0 || (index >= size)) {
           throw new IndexOutOfBoundsException("index can only be positive and less than size" + index);
-        }
-        else {
+      }
+        String current = getNodeAtIndex(index).getData();
+        Node nextVal = getNodeAtIndex(index+1);
 
-            Node nextVal = getNodeAtIndex(index+1);
-            Node beforeVal = getNodeAtIndex(index-1);
+            if (size == 1) {
+                start.setNext(null);
+                end.setPrev(null);
+                size--;
 
-            if (index == 0) {
+            }
+            else {
+             if (index == 0){
                 start = nextVal;
                 nextVal.setPrev(null);
                 size--;
+
             }
             else if (index == size-1) {
+                Node beforeVal = getNodeAtIndex(index-1);
                 end = beforeVal;
                 beforeVal.setNext(null);
                 size--;
             }
             else {
+                Node beforeVal = getNodeAtIndex(index-1);
                 beforeVal.setNext(nextVal);
                 nextVal.setPrev(beforeVal);
                 size--;
             }
         }
-        return getNodeAtIndex(index).getData();
+
+        return current;
     }
 
+
+    public void extend(MyLinkedList other){
+        this.end.setNext(other.start);
+        other.start.setPrev(this.end);
+        this.size = size + other.size();
+        other.size = 0;
+        other.start = null;
+        other.end = null;
+ }
     }
