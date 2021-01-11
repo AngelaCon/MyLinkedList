@@ -111,4 +111,35 @@ public class MyLinkedList {
             }
             return current;
         }
+
+
+
+    public String remove(int index) {
+        if(index < 0 || (index >= size)) {
+          throw new IndexOutOfBoundsException("index can only be positive and less than size" + index);
+        }
+        else {
+
+            Node nextVal = getNodeAtIndex(index+1);
+            Node beforeVal = getNodeAtIndex(index-1);
+
+            if (index == 0) {
+                start = nextVal;
+                nextVal.setPrev(null);
+                size--;
+            }
+            else if (index == size-1) {
+                end = beforeVal;
+                beforeVal.setNext(null);
+                size--;
+            }
+            else {
+                beforeVal.setNext(nextVal);
+                nextVal.setPrev(beforeVal);
+                size--;
+            }
+        }
+        return getNodeAtIndex(index).getData();
+    }
+
     }
